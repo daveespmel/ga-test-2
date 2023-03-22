@@ -1,7 +1,7 @@
 // src/GoogleAnalytics.ts
 import ReactGA from 'react-ga';
 
-const trackingId = 'G-5XCQ699W1J'; // Replace with your Google Analytics tracking ID
+const trackingId = 'UA-259134268-1'; // Replace with your Google Analytics tracking ID
 
 export const initGA = () => {
   ReactGA.initialize(trackingId, { testMode: process.env.NODE_ENV === 'test' });
