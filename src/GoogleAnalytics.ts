@@ -12,6 +12,7 @@ export const trackPage = (page: string) => {
   ReactGA.pageview(page);
 };
 
+
 export const trackEvent = (category: string, action: string, label?: string, value?: number) => {
   ReactGA.event({
     category,
