@@ -5,7 +5,6 @@ import './App.css';
 import { initGA, trackPage } from './GoogleAnalytics';
 
 function App() {
-  
   useEffect(() => {
     initGA();
     trackPage(window.location.pathname + window.location.search);
