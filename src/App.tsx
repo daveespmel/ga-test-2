@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 import { initGA, trackPage, trackEvent } from './GoogleAnalytics';
+import { initFacebookPixel, trackFacebookEvent } from './FacebookPixel'; // Import Facebook Pixel functions
 import SecondScreen from './components/SecondScreen';
 import ThirdScreen from './components/ThirdScreen';
 
@@ -10,28 +11,32 @@ function App() {
   useEffect(() => {
     initGA();
     trackPage(window.location.pathname + window.location.search);
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.offsetHeight;
+      const scrollPosition = scrollTop + windowHeight;
+      if (scrollPosition >= docHeight) {
+        trackEvent('Scroll', 'Reach Bottom', 'User reached the bottom of the page');
+      }
+    };
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
+  
   }, []);
 
   const handleLinkClick = () => {
     trackEvent('Link', 'Click', 'Learn React');
+    trackFacebookEvent('LinkClick', { linkText: 'Learn React' });
   };
 
-  const handleScroll = () => {
-    const scrollTop = window.pageYOffset;
-    const windowHeight = window.innerHeight;
-    const docHeight = document.documentElement.offsetHeight;
-    const scrollPosition = scrollTop + windowHeight;
-    if (scrollPosition >= docHeight) {
-      trackEvent('Scroll', 'Reach Bottom', 'User reached the bottom of the page');
-    }
-  };
+  
 
   const handleCustomButtonClick = () => {
     trackEvent('Custom', 'Button Click', 'User clicked the custom event button');
+    trackFacebookEvent('CustomButtonClick', { buttonText: 'Trigger Custom Event' });
   };
 
   return (
