@@ -10,6 +10,7 @@ import ThirdScreen from './components/ThirdScreen';
 function App() {
   useEffect(() => {
     initGA();
+    initFacebookPixel();
     trackPage(window.location.pathname + window.location.search);
     const handleScroll = () => {
       const scrollTop = window.pageYOffset;
